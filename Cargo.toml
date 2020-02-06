@@ -1,0 +1,15 @@
+[package]
+name = "struct2hashmap"
+version = "0.1.0"
+authors = ["Sergey Chernomorets <s.chernomorets@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+struct2hashmap_derive = { path = "struct2hashmap_derive" }
+
+
+[workspace]
+members = [
+	"struct2hashmap_derive"
+]
+
