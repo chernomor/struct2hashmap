@@ -3,5 +3,6 @@ pub use struct2hashmap_derive::ToHashMap;
 
 pub trait ToHashMap {
 	fn to_hashmap(&self) -> HashMap<String, String>;
+	fn to_hashmap_with_prefix(&self, prefix: &str) -> HashMap<String, String>;
 }
 

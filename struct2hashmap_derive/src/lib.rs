@@ -22,11 +22,19 @@ pub fn to_hashmap(input: TokenStream) -> TokenStream {
 		},
 		_ => panic!("You can only derive this on structs with named fields!"),
 	};
-	let inserts = fields.iter().map(|field| { 
+	let inserts = fields.iter().map(|field| {
 		let ident = field.ident.as_ref().unwrap();
 		let key = ident.to_string();
 		quote! {
 			hm.insert(#key.to_string(), format!("{}", self.#ident))
+		}
+	});
+
+	let inserts_prefix = fields.iter().map(|field| {
+		let ident = field.ident.as_ref().unwrap();
+		let key = ident.to_string();
+		quote! {
+			hm.insert(format!("{}{}", prefix, #key.to_string()), format!("{}", self.#ident))
 		}
 	});
 
@@ -35,8 +43,12 @@ pub fn to_hashmap(input: TokenStream) -> TokenStream {
 		impl ToHashMap for #struct_name {
 			fn to_hashmap(&self) -> HashMap<String, String> {
 				let mut hm = HashMap::new();
-
 				#( #inserts; )*
+				hm
+			}
+			fn to_hashmap_with_prefix(&self, prefix: &str) -> HashMap<String, String> {
+				let mut hm = HashMap::new();
+				#( #inserts_prefix; )*
 				hm
 			}
 		}
