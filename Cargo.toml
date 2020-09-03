@@ -4,9 +4,14 @@ version = "0.1.0"
 authors = ["Sergey Chernomorets <s.chernomorets@gmail.com>"]
 edition = "2018"
 
+description = "Procedural macro to convert struct to hashmap"
+license = "MIT"
+homepage = "https://github.com/chernomor/struct2hashmap"
+repository = "https://github.com/chernomor/struct2hashmap"
+readme = "README.md"
+
 [dependencies]
 struct2hashmap_derive = { path = "struct2hashmap_derive" }
-
 
 [workspace]
 members = [
